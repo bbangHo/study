@@ -1,8 +1,8 @@
-package apiPayload;
+package umc.study.apiPayload;
 
 
-import apiPayload.code.BaseCode;
-import apiPayload.code.status.SuccessStatus;
+import umc.study.apiPayload.code.BaseCode;
+import umc.study.apiPayload.code.status.SuccessStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

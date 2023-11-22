@@ -1,7 +1,7 @@
-package apiPayload.exception;
+package umc.study.apiPayload.exception;
 
-import apiPayload.code.BaseErrorCode;
-import apiPayload.code.ErrorReasonDTO;
+import umc.study.apiPayload.code.BaseErrorCode;
+import umc.study.apiPayload.code.ErrorReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

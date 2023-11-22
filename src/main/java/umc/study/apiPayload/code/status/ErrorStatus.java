@@ -1,7 +1,7 @@
-package apiPayload.code.status;
+package umc.study.apiPayload.code.status;
 
-import apiPayload.code.BaseErrorCode;
-import apiPayload.code.ErrorReasonDTO;
+import umc.study.apiPayload.code.BaseErrorCode;
+import umc.study.apiPayload.code.ErrorReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

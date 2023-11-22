@@ -1,8 +1,8 @@
-package apiPayload.exception;
+package umc.study.apiPayload.exception;
 
-import apiPayload.ApiResponse;
-import apiPayload.code.ErrorReasonDTO;
-import apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.ApiResponse;
+import umc.study.apiPayload.code.ErrorReasonDTO;
+import umc.study.apiPayload.code.status.ErrorStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +22,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-// @RestController 어노테이션이 부여된 컨트롤러 클래스들에 대한 전역적인 예외 처리를 수행하는 클래스
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
-
+// @RestController 어노테이션이 부여된 컨트롤러 클래스들에 대한 전역적인 예외 처리를 수행하는 클래스
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {

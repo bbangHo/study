@@ -1,4 +1,4 @@
-package apiPayload.code;
+package umc.study.apiPayload.code;
 
 public interface BaseErrorCode {
 

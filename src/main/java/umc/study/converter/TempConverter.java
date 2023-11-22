@@ -3,7 +3,7 @@ package umc.study.converter;
 
 import umc.study.web.dto.TempResponse;
 
-public class TempConvert {
+public class TempConverter {
 
     public static TempResponse.TempTestDTO toTempTestDTO(){
         return TempResponse.TempTestDTO.builder()
