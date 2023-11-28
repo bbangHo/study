@@ -1,23 +1,16 @@
 package umc.study.web.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import umc.study.domain.Review;
-import umc.study.domain.enums.Gender;
-import umc.study.domain.enums.MemberStatus;
-import umc.study.domain.enums.SocialType;
-import umc.study.domain.mapping.MemberMission;
+import umc.study.validation.annotation.ExistCategories;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRequestDTO {
@@ -27,11 +20,22 @@ public class MemberRequestDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class JoinDTO {
+        @NotBlank(message = "공백일 수 없습니다.")
         String name;
+
+        @NotNull(message = "1(MALE) 또는 2(FEMALE) 이어야 합니다.")
         Integer gender;
+
+        @Past(message = "현재 보다 과거 시간이어야 합니다.")
         LocalDateTime brith;
+
+        @Size(min = 5, max = 255, message = "5 ~ 255 글자입니다.")
         String address;
+
+        @Size(min = 5, max = 255, message = "5 ~ 255 글자입니다.")
         String specAddress;
+
+        @ExistCategories
         List<Long> preferCategory;
     }
 }
