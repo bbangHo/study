@@ -4,13 +4,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import umc.study.common.BaseEntity;
 import umc.study.domain.enums.Gender;
 import umc.study.domain.enums.MemberStatus;
 import umc.study.domain.enums.SocialType;
 import umc.study.domain.mapping.MemberMission;
+import umc.study.domain.mapping.MemberPrefer;
+import umc.study.repository.FoodCategoryRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +24,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @DynamicInsert  // null 빼고 insert 쿼리 날림
+@DynamicUpdate
 public class Member extends BaseEntity {
 
     @Id
@@ -50,10 +55,18 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 40)
+    // TODO: format을 yyyy-mm-dd 로 바꾸기
+    private LocalDateTime brith;
+
+//    @Column(nullable = false, length = 40)
+    @ColumnDefault("' '")
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
+
+    @OneToMany
+    private List<MemberPrefer> memberPreferList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<MemberMission> memberMissionsList = new ArrayList<>();
