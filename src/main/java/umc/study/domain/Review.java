@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.study.common.BaseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Builder
 @Getter
