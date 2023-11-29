@@ -37,4 +37,11 @@ public class Review extends BaseEntity {
         this.store = store;
         store.getReviewList().add(this);
     }
+
+    public void addMemberAndStore(Member member, Store store) {
+        this.store = store;
+        this.member = member;
+        store.getReviewList().add(this);
+        member.getReviewList().add(this);
+    }
 }

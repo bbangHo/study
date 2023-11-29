@@ -31,7 +31,10 @@ public enum ErrorStatus implements BaseErrorCode {
     FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "FOOD_CATEGORY400_1", "FoodCategory를 찾을 수 없음. 잘못된 FoodCategory 식별자를 전달함"),
 
     // Region
-    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST, "REGION_NOT_FOUND400_1", "Region을 찾을 수 없음. 잘못된 Region을 식별자를 전달함")
+    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST, "REGION_NOT_FOUND400_1", "Region을 찾을 수 없음. 잘못된 Region을 식별자를 전달함"),
+
+    // Store
+    STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "STORE_NOT_FOUND400_1", "Store를 찾을 수 없음. 잘못된 Store를 식별자를 전달함")
     ;
 
 

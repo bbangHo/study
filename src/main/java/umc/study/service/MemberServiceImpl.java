@@ -3,8 +3,6 @@ package umc.study.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exception.handler.TempHandler;
 import umc.study.converter.MemberConverter;
 import umc.study.converter.MemberPreferConverter;
 import umc.study.domain.FoodCategory;
@@ -35,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
         List<FoodCategory> foodCategoryList = joinDTO.getPreferCategory().stream()
                         .map(foodCategory -> {
                             // .map에서의 return은 각 요소에 대해 새로운 값을 반환하는 기능
-                            return foodCategoryRepository.findById(foodCategory).orElseThrow(() -> new TempHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND));
+                            return foodCategoryRepository.findById(foodCategory).get();
                         }).collect(Collectors.toList());
 
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
