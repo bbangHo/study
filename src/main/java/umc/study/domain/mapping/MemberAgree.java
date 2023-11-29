@@ -1,4 +1,4 @@
-package umc.study.mapping;
+package umc.study.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;

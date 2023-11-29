@@ -16,6 +16,6 @@ public class FoodCategory extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private FoodType foodType;
+//    @Enumerated(EnumType.STRING)
+    private String name;
 }
