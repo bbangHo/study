@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.study.common.BaseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Builder
 @Getter
@@ -39,5 +36,12 @@ public class Review extends BaseEntity {
     public void addStore(Store store) {
         this.store = store;
         store.getReviewList().add(this);
+    }
+
+    public void addMemberAndStore(Member member, Store store) {
+        this.store = store;
+        this.member = member;
+        store.getReviewList().add(this);
+        member.getReviewList().add(this);
     }
 }

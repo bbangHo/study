@@ -24,13 +24,14 @@ public class CategoriesExistValidator implements ConstraintValidator<ExistCatego
     @Override
     public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
         boolean isValid = values.stream()
-                .allMatch(value -> memberQueryService.getFoodCategory(value));
+                .allMatch(value -> memberQueryService.existFoodCategory(value));
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();        // 기본 제약 조건 위반을 비활성
             context.buildConstraintViolationWithTemplate(ErrorStatus.FOOD_CATEGORY_NOT_FOUND.toString()).addConstraintViolation();
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
