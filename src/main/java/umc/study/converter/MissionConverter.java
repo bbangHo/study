@@ -34,7 +34,7 @@ public class MissionConverter {
     }
 
     public static MissionRequestDTO.changeMissionStatusDTO toChangeMissionStatusDTO(MissionRequestDTO.RquestChangeMissionStatusDTO reqDTO,
-                                                                                    Long storeId, Long missionId) {
+                                                                                    Long memberId, Long missionId) {
         MissionStatus missionStatus = null;
 
         switch (reqDTO.getStatusId().intValue()) {
@@ -43,10 +43,9 @@ public class MissionConverter {
         }
 
         return MissionRequestDTO.changeMissionStatusDTO.builder()
-                .storeId(storeId)
                 .missionId(missionId)
                 .missionStatus(missionStatus)
-                .memberId(reqDTO.getMemberId())
+                .memberId(memberId)
                 .build();
     }
 

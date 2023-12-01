@@ -72,6 +72,7 @@ public class StoreResponseDTO {
     @AllArgsConstructor
     public static class MissionDTO{
         Long storeId;
+        Long missionId;
         Integer reward;
         String mission_spec;
         LocalDate deadline;

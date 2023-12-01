@@ -1,5 +1,6 @@
 package umc.study.converter;
 
+import umc.study.domain.Mission;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.web.dto.MissionRequestDTO;
@@ -22,10 +23,10 @@ public class MemberMissionConverter {
                 .build();
     }
 
-    public static MissionResponseDTO.changeMissionStatusResultDTO toChangeMissionStatusResult(MemberMission memberMission) {
+    public static MissionResponseDTO.changeMissionStatusResultDTO toChangeMissionStatusResult(Mission mission) {
         return MissionResponseDTO.changeMissionStatusResultDTO.builder()
-                .missionId(memberMission.getId())
-                .createdAt(LocalDateTime.now())
+                .missionId(mission.getId())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }

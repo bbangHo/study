@@ -25,6 +25,6 @@ public class MissionResponseDTO {
     @AllArgsConstructor
     public static class changeMissionStatusResultDTO {
         Long missionId;
-        LocalDateTime createdAt;
+        LocalDateTime updatedAt;
     }
 }

@@ -1,5 +1,6 @@
 package umc.study.service.missionService;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import umc.study.apiPayload.code.status.ErrorStatus;
@@ -23,10 +24,10 @@ public class MissionServiceImpl implements MissionService {
 
     private final MissionRepository missionRepository;
     private final StoreRepository storeRepository;
-    private final MemberRepository memberRepository;
     private final MemberMissionRepository memberMissionRepository;
 
     @Override
+    @Transactional
     public MissionResponseDTO.addMissionResultDTO addMission(MissionRequestDTO.addMissionDTO addMissionDTO) {
         Mission mission = MissionConverter.toMission(addMissionDTO);
         Store store = storeRepository.findById(addMissionDTO.getStoreId()).get();
@@ -37,14 +38,17 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @Transactional
     public MissionResponseDTO.changeMissionStatusResultDTO changeMissionStatus(MissionRequestDTO.changeMissionStatusDTO cmsDTO) {
         MemberMission memberMission = memberMissionRepository.getMemberMissionByMissionIdAndMemberId(cmsDTO.getMissionId(), cmsDTO.getMemberId());
-        Member member = memberRepository.findById(cmsDTO.getMemberId()).orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
-        Mission mission = missionRepository.findById(cmsDTO.getMissionId()).orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
+        Member member = memberMission.getMember();
+        Mission mission = memberMission.getMission();
 
         memberMission.addMemberAndMission(member, mission);
         memberMission.changeMissionStatus(cmsDTO.getMissionStatus());
 
-        return MemberMissionConverter.toChangeMissionStatusResult(memberMissionRepository.save(memberMission));
+        memberMissionRepository.save(memberMission);
+
+        return MemberMissionConverter.toChangeMissionStatusResult(mission);
     }
 }

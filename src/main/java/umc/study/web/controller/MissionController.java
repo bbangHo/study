@@ -25,15 +25,4 @@ public class MissionController {
         MissionRequestDTO.addMissionDTO addMissionDTO = MissionConverter.toAddMissionDTO(reqDTO, storeId);
         return missionService.addMission(addMissionDTO);
     }
-
-    @PatchMapping("store/{storeId}/mission/{missionId}/status")
-    public MissionResponseDTO.changeMissionStatusResultDTO changeMissionStatus(@Valid @RequestBody MissionRequestDTO.RquestChangeMissionStatusDTO reqDTO,
-                                                                               @ExistStore @RequestParam(name = "storeId") Long storeId,
-                                                                               @IsChallenging @RequestParam(name = "missionId") Long missionId) {
-
-        MissionRequestDTO.changeMissionStatusDTO changeMissionStatusDTO = MissionConverter.toChangeMissionStatusDTO(reqDTO, storeId, missionId);
-
-        return missionService.changeMissionStatus(changeMissionStatusDTO);
-    }
-
 }

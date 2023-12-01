@@ -68,6 +68,7 @@ public class StoreConverter {
     public static StoreResponseDTO.MissionDTO missionDTO(Mission mission){
         return StoreResponseDTO.MissionDTO.builder()
                 .storeId(mission.getStore().getId())
+                .missionId(mission.getId())
                 .mission_spec(mission.getMissionSpec())
                 .reward(mission.getReward())
                 .deadline(mission.getDeadlien())

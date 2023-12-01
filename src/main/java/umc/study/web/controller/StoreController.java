@@ -53,11 +53,11 @@ public class StoreController {
     })
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
-            @Parameter(name = "page", description = "페이지는 1 부터 시작입니다.")
+            @Parameter(name = "page", description = "페이지는 1부터 시작입니다.")
     })
     public ApiResponse<StoreResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId,
                                                                             @CheckPage @RequestParam(name = "page") Integer page) {
-        Page<Review> reviewPage = storeQueryService.getReviewList(storeId, --page);
+        Page<Review> reviewPage = storeQueryService.getReviewList(storeId, page - 1);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviewPage));
     }
 
@@ -74,11 +74,11 @@ public class StoreController {
     })
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
-            @Parameter(name = "page", description = "페이지는 1 부터 시작입니다.")
+            @Parameter(name = "page", description = "페이지는 1부터 시작입니다.")
     })
     public ApiResponse<StoreResponseDTO.MissionListDTO> getMissionList(@ExistStore @PathVariable(name = "storeId") Long storeId,
                                                                        @CheckPage @RequestParam(name = "page") Integer page) {
-        Page<Mission> missionPage = storeQueryService.getMissionList(storeId, --page);
+        Page<Mission> missionPage = storeQueryService.getMissionList(storeId, page - 1);
         return ApiResponse.onSuccess(StoreConverter.missionListDTO(missionPage));
     }
 

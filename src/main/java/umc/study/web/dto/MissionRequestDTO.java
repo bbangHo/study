@@ -52,9 +52,6 @@ public class MissionRequestDTO {
     @NoArgsConstructor
     public static class RquestChangeMissionStatusDTO {
         @Positive
-        private Long memberId;
-
-        @Positive
         @DecimalMin(value = "1")
         @DecimalMax(value = "2")
         private Long statusId;        // 1: challenging, 2: complete
@@ -69,13 +66,13 @@ public class MissionRequestDTO {
 
         private Long missionId;
 
-        private Long storeId;
+//        private Long storeId;
 
         private MissionStatus missionStatus;        // 1: challenging, 2: complete
 
-        public void setMissionIdAndStoreId(Long missionId, Long storeId) {
-            this.missionId = missionId;
-            this.storeId = storeId;
-        }
+//        public void setMissionIdAndStoreId(Long missionId, Long storeId) {
+//            this.missionId = missionId;
+//            this.storeId = storeId;
+//        }
     }
 }

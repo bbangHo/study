@@ -2,10 +2,12 @@ package umc.study.converter;
 
 import org.springframework.data.domain.Page;
 import umc.study.domain.Member;
+import umc.study.domain.Mission;
 import umc.study.domain.Review;
 import umc.study.domain.enums.Gender;
 import umc.study.web.dto.MemberRequestDTO;
 import umc.study.web.dto.MemberResponseDTO;
+import umc.study.web.dto.StoreResponseDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -41,7 +43,7 @@ public class MemberConverter {
                 .build();
     }
 
-    public static MemberResponseDTO.ReviewPreViewDTO reviewPreViewDTO(Review review) {
+    public static MemberResponseDTO.ReviewPreViewDTO reviewPreViewDTO(Review review){
         return MemberResponseDTO.ReviewPreViewDTO.builder()
                 .ownerNickname(review.getMember().getName())
                 .score(review.getScore())
@@ -49,7 +51,6 @@ public class MemberConverter {
                 .createdAt(LocalDate.now())
                 .build();
     }
-
     public static MemberResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(Page<Review> reviewList){
         List<MemberResponseDTO.ReviewPreViewDTO> reviewPreViewListDTO = reviewList.stream()
                 .map(MemberConverter::reviewPreViewDTO).collect(Collectors.toList());
@@ -61,6 +62,31 @@ public class MemberConverter {
                 .totalElements(reviewList.getTotalElements())
                 .isFirst(reviewList.isFirst())
                 .isLast(reviewList.isLast())
+                .build();
+    }
+
+    public static MemberResponseDTO.MissionDTO missionDTO(Mission mission){
+        return MemberResponseDTO.MissionDTO.builder()
+                .storeId(mission.getStore().getId())
+                .missionId(mission.getId())
+                .mission_spec(mission.getMissionSpec())
+                .reward(mission.getReward())
+                .deadline(mission.getDeadlien())
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static MemberResponseDTO.MissionListDTO missionListDTO(Page<Mission> missionList){
+        List<MemberResponseDTO.MissionDTO> missionListDTO = missionList.stream()
+                .map(MemberConverter::missionDTO).collect(Collectors.toList());
+
+        return MemberResponseDTO.MissionListDTO.builder()
+                .missionList(missionListDTO)
+                .listSize(missionList.getSize())
+                .totalPage(missionList.getTotalPages())
+                .totalElements(missionList.getTotalElements())
+                .isFirst(missionList.isFirst())
+                .isLast(missionList.isLast())
                 .build();
     }
 }
