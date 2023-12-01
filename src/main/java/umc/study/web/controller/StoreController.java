@@ -13,13 +13,12 @@ import umc.study.web.dto.StoreRequestDTO;
 import umc.study.web.dto.StoreResponseDTO;
 
 @RestController
-@RequestMapping("store")
 @RequiredArgsConstructor
 public class StoreController {
 
     private final StoreService storeService;
 
-    @PostMapping
+    @PostMapping("store")
     public ApiResponse<StoreResponseDTO.ResponseDTO> enrollStore(@Valid @RequestBody StoreRequestDTO.RequestDTO requestDTO) {
         return ApiResponse.onSuccess(storeService.enrollStore(requestDTO));
     }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.study.domain.FoodCategory;
 import umc.study.domain.Member;
-import umc.study.domain.Mission;
 
 @Entity
 @Builder
@@ -25,7 +24,7 @@ public class MemberPrefer {
     @JoinColumn(name = "food_category_id")
     private FoodCategory foodCategory;
 
-    public void setMember(Member member){
+    public void addMember(Member member){
         if(this.member != null)
             member.getMemberPreferList().remove(this);
         this.member = member;

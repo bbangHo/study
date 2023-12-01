@@ -39,6 +39,9 @@ public class Store extends BaseEntity {
     @OneToMany(mappedBy = "store")
     private List<Review> reviewList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "store")
+    private List<Mission> MissionList = new ArrayList<>();
+
     public void setRegion(Region region) {
         this.region = region;
     }

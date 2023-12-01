@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 
         // 양방향 연관 관계 설정은 converter 보다는 service에서 하는 것이 좋음
         memberPreferList.forEach(memberPrefer -> {
-            memberPrefer.setMember(member);
+            memberPrefer.addMember(member);
             memberPreferRepository.save(memberPrefer);      // 영속화 시키지 않고 member에 넣어서 flush 하니까 에러뜸
         });
 

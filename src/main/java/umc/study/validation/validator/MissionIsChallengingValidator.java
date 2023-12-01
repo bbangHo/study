@@ -5,27 +5,29 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.service.StoreQueryService;
-import umc.study.validation.annotation.ExistStore;
+import umc.study.domain.enums.MissionStatus;
+import umc.study.domain.mapping.MemberMission;
+import umc.study.service.MemberQueryService;
+import umc.study.validation.annotation.IsChallenging;
 
 @Component
 @RequiredArgsConstructor
-public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
+public class MissionIsChallengingValidator implements ConstraintValidator<IsChallenging, Long> {
 
-    private final StoreQueryService storeQueryService;
+    private final MemberQueryService memberQueryService;
 
     @Override
-    public void initialize(ExistStore constraintAnnotation) {
+    public void initialize(IsChallenging constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        boolean isValid = storeQueryService.existStore(value);
+        Boolean isValid = memberQueryService.MemberMissionIsChallenging(value);
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();        // 기본 제약 조건 위반을 비활성
-            context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.MISSION_ALREADY_CHALLENGING.toString()).addConstraintViolation();
             return false;
         }
 

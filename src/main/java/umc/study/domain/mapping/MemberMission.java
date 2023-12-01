@@ -6,6 +6,7 @@ import umc.study.common.BaseEntity;
 import umc.study.domain.Member;
 import umc.study.domain.Mission;
 import umc.study.domain.enums.MissionStatus;
+import umc.study.service.MissionService;
 
 @Entity
 @Builder
@@ -37,5 +38,16 @@ public class MemberMission extends BaseEntity {
     public void addMission(Mission mission) {
         this.mission = mission;
         mission.getMemberMissionsList().add(this);
+    }
+
+    public void addMemberAndMission(Member member, Mission mission) {
+        member.getMemberMissionsList().add(this);
+        mission.getMemberMissionsList().add(this);
+        this.member = member;
+        this.mission = mission;
+    }
+
+    public void changeMissionStatus(MissionStatus missionStatus){
+        this.missionStatus = missionStatus;
     }
 }
