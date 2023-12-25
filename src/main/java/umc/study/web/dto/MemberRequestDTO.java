@@ -1,9 +1,6 @@
 package umc.study.web.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +21,8 @@ public class MemberRequestDTO {
         String name;
 
         @NotNull(message = "1(MALE) 또는 2(FEMALE) 이어야 합니다.")
+        @Max(value = 2)
+        @Min(value = 1)
         Integer gender;
 
         @Past(message = "현재 보다 과거 시간이어야 합니다.")

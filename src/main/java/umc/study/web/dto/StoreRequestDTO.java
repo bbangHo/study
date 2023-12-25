@@ -1,15 +1,13 @@
 package umc.study.web.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.study.domain.Review;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StoreRequestDTO {
 
@@ -17,7 +15,7 @@ public class StoreRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class RequestDTO{
+    public static class StoreDTO {
         @NotBlank
         private String name;
 
@@ -26,5 +24,21 @@ public class StoreRequestDTO {
 
         @Positive
         private Long regionNumber;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ReviewDTO {
+        @Positive
+        private Long memberId;
+
+        @NotBlank
+        private String content;
+
+        @Max(value = 5)
+        @Min(value = 1)
+        private Integer score;
     }
 }

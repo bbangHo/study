@@ -1,14 +1,16 @@
 package umc.study.web.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import umc.study.domain.enums.MissionStatus;
-import umc.study.validation.annotation.ExistStore;
-import umc.study.validation.annotation.IsChallenging;
 
 import java.time.LocalDate;
 
@@ -26,6 +28,7 @@ public class MissionRequestDTO {
         private Integer reward;
 
         @Future(message = "현재보다 미래의 시간이어야 합니다.")
+        @DateTimeFormat(pattern = "yyyy-mm-dd")
         private LocalDate deadlien;
     }
 

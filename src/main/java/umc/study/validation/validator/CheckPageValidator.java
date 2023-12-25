@@ -5,27 +5,24 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.service.storeService.StoreQueryService;
-import umc.study.validation.annotation.ExistStore;
+import umc.study.validation.annotation.CheckPage;
 
 @Component
 @RequiredArgsConstructor
-public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
-
-    private final StoreQueryService storeQueryService;
+public class CheckPageValidator implements ConstraintValidator<CheckPage, Integer> {
 
     @Override
-    public void initialize(ExistStore constraintAnnotation) {
+    public void initialize(CheckPage constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(Long value, ConstraintValidatorContext context) {
-        boolean isValid = storeQueryService.existStore(value);
+    public boolean isValid(Integer value, ConstraintValidatorContext context) {
+        boolean isValied = value > 0;
 
-        if (!isValid) {
+        if(!isValied) {
             context.disableDefaultConstraintViolation();        // 기본 제약 조건 위반을 비활성
-            context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.PAGE_NUMBER_BAD_REQUEST.toString()).addConstraintViolation();
             return false;
         }
 
