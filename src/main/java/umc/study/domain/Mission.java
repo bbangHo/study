@@ -29,7 +29,7 @@ public class Mission extends BaseEntity {
 
     private Integer reward;
 
-    private LocalDate deadlien;
+    private LocalDate deadlien;     // TODO: 오타, LocalDateTime으로 바꿔야하지 않을까..?
 
     @OneToMany(mappedBy = "mission")
     private List<MemberMission> memberMissionsList = new ArrayList<>();

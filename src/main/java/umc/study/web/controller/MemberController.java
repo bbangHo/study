@@ -9,10 +9,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.study.apiPayload.ApiResponse;
 import umc.study.converter.MemberConverter;
+import umc.study.domain.Review;
 import umc.study.service.memberService.MemberQueryService;
 import umc.study.service.memberService.MemberService;
 import umc.study.validation.annotation.CheckPage;
@@ -34,7 +36,10 @@ public class MemberController {
     }
 
     @GetMapping("{memberId}/reviews")
-    @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
+    @Operation(
+            summary = "특정 회원이 작성한 리뷰 목록 조회 API",
+            description = "특정 회원이 작성한 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요"
+    )
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
@@ -47,6 +52,7 @@ public class MemberController {
     })
     public ApiResponse<MemberResponseDTO.ReviewPreViewListDTO> getReviewList(@Positive @PathVariable(name = "memberId") Long memberId,
                                                                              @CheckPage @RequestParam(name = "page") Integer page) {
-        return ApiResponse.onSuccess(MemberConverter.reviewPreViewListDTO(memberQueryService.getMemberReviews(memberId, --page)));
+        Page<Review> reviewPage = memberQueryService.getMemberReviews(memberId, --page);
+        return ApiResponse.onSuccess(MemberConverter.reviewPreViewListDTO(reviewPage));
     }
 }
