@@ -25,7 +25,7 @@ import java.util.Optional;
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
-// @RestController 어노테이션이 부여된 컨트롤러 클래스들에 대한 전역적인 예외 처리를 수행하는 클래스
+// @Controller 어노테이션이 부여된 컨트롤러 클래스들에 대한 전역적인 예외 처리를 수행하는 클래스
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
