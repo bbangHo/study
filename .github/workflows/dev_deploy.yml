@@ -37,7 +37,7 @@ jobs:
 
       - name: Show Current Time
         run: echo "CurrentTime=$"
-        shell: bash # (9).확보한 시간 보여주기
+        shell: bash # (9).확보한 시간 보여주기 .
 
       - name: Generate deployment package
         run: |
